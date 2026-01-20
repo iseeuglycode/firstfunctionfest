@@ -13,7 +13,14 @@ namespace FirstFunctionFest
         /// <returns>A task representing the asynchronous operation.</returns>
         public async Task HandleAsync(HttpContext context)
         {
-            await context.Response.WriteAsync("Hello, Functions Festers.");
+            string name = context.Request.Query["name"].ToString();
+
+            if (string.IsNullOrEmpty(name))
+            {
+                name = "Functions Festers";
+            }
+
+            await context.Response.WriteAsync($"Hello, {name}!");
         }
     }
 }
